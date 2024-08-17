@@ -5,7 +5,7 @@ chmod +x certbot_auto.sh
 loc=$(pwd)
 
 # Define the cron job command
-cron_job="0 0 1 */2 * /bin/bash $loc/certbot_auto.sh >> /var/log/certbot_cron.log 2>&1"
+cron_job="0 0 1 */2 * $loc/certbot_auto.sh >> /var/log/certbot_cron.log 2>&1"
 
 # Check if the cron job command already exists in the crontab
 if ! sudo crontab -u root -l | grep -qFx "$cron_job"; then
@@ -16,3 +16,5 @@ else
     # If the cron job command already exists, print a message indicating it
     echo "Cron job already exists, skipping addition."
 fi
+
+./certbot_auto.sh
